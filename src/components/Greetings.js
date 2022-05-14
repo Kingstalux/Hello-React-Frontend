@@ -10,7 +10,10 @@ export default function Greetings() {
   };
   const dataArray = useSelector((state) => state.greetings);
 
-  const greetings = dataArray.map((greeting) => (
+  const arr = [];
+  arr.push(dataArray);
+
+  const greetings = arr.map((greeting) => (
     <li key={greeting.id}>{greeting.name}</li>
   ));
 

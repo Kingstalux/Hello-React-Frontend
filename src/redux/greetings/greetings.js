@@ -3,10 +3,10 @@ const FETCH_GREETINGS_SUCCESS = 'hello-react-frontend/greetings/FETCH_GREETINGS_
 const FETCH_GREETINGS_FAILURE = 'hello-react-frontend/greetings/FETCH_GREETINGS_FAILURE';
 
 const initialState = {
-  greetings: [{
+  greetings: {
     name: 'HELLO WELT',
     id: 0,
-  }],
+  },
   loading: false,
   error: null,
 };
@@ -32,7 +32,7 @@ function handleErrors(response) {
   return response;
 }
 
-const url = 'http://localhost:3000/v1/greetings';
+const url = 'http://127.0.0.1:3000/v1/greetings';
 
 export function fetchGreetings() {
   return (dispatch) => {
@@ -41,11 +41,7 @@ export function fetchGreetings() {
       .then(handleErrors)
       .then((res) => res.json())
       .then((json) => {
-        const data = {
-          name: json.name,
-          id: json.id,
-        };
-        dispatch(fetchGreetingsSuccess(data));
+        dispatch(fetchGreetingsSuccess(json));
       })
       .catch((error) => dispatch(fetchGreetingsFailure(error)));
   };
