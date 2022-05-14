@@ -27,6 +27,8 @@ Follow the steps bellow to get a local copy up and running.
 
 -  Run `npm start` to run the local server
 
+- Set up and run the backend server for the api endpoint.
+
 
 
 
