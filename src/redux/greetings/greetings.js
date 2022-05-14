@@ -3,7 +3,10 @@ const FETCH_GREETINGS_SUCCESS = 'hello-react-frontend/greetings/FETCH_GREETINGS_
 const FETCH_GREETINGS_FAILURE = 'hello-react-frontend/greetings/FETCH_GREETINGS_FAILURE';
 
 const initialState = {
-  data: [],
+  greetings: [{
+    name: 'HELLO WELT',
+    id: 0,
+  }],
   loading: false,
   error: null,
 };
@@ -38,8 +41,10 @@ export function fetchGreetings() {
       .then(handleErrors)
       .then((res) => res.json())
       .then((json) => {
-        const data = [];
-        data.push(json);
+        const data = {
+          name: json.name,
+          id: json.id,
+        };
         dispatch(fetchGreetingsSuccess(data));
       })
       .catch((error) => dispatch(fetchGreetingsFailure(error)));
@@ -59,7 +64,7 @@ const greetingsReducer = (state = initialState, action) => {
       return {
         ...state,
         loading: false,
-        data: action.payload,
+        greetings: action.payload,
       };
 
     case FETCH_GREETINGS_FAILURE:
@@ -67,7 +72,7 @@ const greetingsReducer = (state = initialState, action) => {
         ...state,
         loading: false,
         error: action.payload.error,
-        data: [],
+        greetings: [],
       };
 
     default:
